@@ -170,8 +170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f00a5557c50b14449d20405f840f3d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  group: {fileID: 0}
-  ui_group_to_fade: {fileID: 0}
+  group: {fileID: 2529416924027386563}
+  ui_group_to_fade: {fileID: 2529416924027386563}
   main_canvas: {fileID: 0}
   click_blocker: {fileID: 0}
   debug_override_ui_visible: 1

@@ -8,7 +8,7 @@ using System.Linq;
 
 public class AnimationManager : MonoBehaviour
 {
-    public static AnimationManager instance;
+    public static AnimationManager Instance;
     /// <summary>
     /// DEBUG, view in-editor which animation we're on (in case we get stuck)
     /// </summary>
@@ -29,9 +29,33 @@ public class AnimationManager : MonoBehaviour
     /// If game over, only accept certain new animations
     /// </summary>
     public bool accepting_normal_animations = true;
+
+
+
+    public IEnumerator PlayAndFinishAnimation(Animator animator, string animName)
+    {
+        if (animator == null)
+            yield break;
+        else
+        {
+            animator.Play(animName);
+            yield return null;
+            while (animator.GetCurrentAnimatorStateInfo(0).IsName(animName))
+            {
+                yield return null;
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// Coroutine instance playing animations
+    /// </summary>
     IEnumerator AnimationLoopCo;
-
-
+    /// <summary>
+    /// ALWAYS PLAYING, dequeues and plays animations
+    /// </summary>
+    /// <returns></returns>
     IEnumerator PlayAnimationsLoop()
     {
         while (true)
@@ -70,7 +94,7 @@ public class AnimationManager : MonoBehaviour
 
     public static void AddAnim(IEnumerator anim, bool override_dont_accept_animations = false, bool blocks_controls = true)
     {
-        AnimationManager.instance.AddAnimation(anim, override_dont_accept_animations: override_dont_accept_animations, blocks_controls: blocks_controls);
+        AnimationManager.Instance.AddAnimation(anim, override_dont_accept_animations: override_dont_accept_animations, blocks_controls: blocks_controls);
     }
     public void AddAnimation(IEnumerator anim, bool override_dont_accept_animations = false, bool blocks_controls = true)
     {
@@ -80,14 +104,14 @@ public class AnimationManager : MonoBehaviour
     }
     public static void ClearALLQueuedAnimations()
     {
-        AnimationManager.instance.queued_animations.Clear();
+        AnimationManager.Instance.queued_animations.Clear();
         // Turn OFF then ON this object to kill coroutine
-        AnimationManager.instance.RestartAnimationsLoop();
+        AnimationManager.Instance.RestartAnimationsLoop();
     }
 
     void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
     private void OnEnable()

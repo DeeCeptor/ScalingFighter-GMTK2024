@@ -1,0 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class OnCollisionTriggerable : MonoBehaviour
+{
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.transform.TryGetComponent<ITriggerable>(out ITriggerable triggerable) == true)
+            triggerable.OnCollision(this.gameObject);
+    }
+}
