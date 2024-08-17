@@ -7,6 +7,11 @@ using UnityEngine;
 /// </summary>
 public class Player : ITriggerable
 {
+    /// <summary>
+    /// Contains player health
+    /// </summary>
+    public Damageable PlayerDamage;
+
     public static Player Instance;
     void Awake()
     {

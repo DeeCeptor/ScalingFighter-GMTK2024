@@ -24,7 +24,7 @@ public class Damageable : ITriggerable
         base.OnCollision(collided);
         if (collided.CompareTag(TagThatHurtsUs))
         {
-            AlterHealth(-1f);
+            AlterHealth(-20f);
         }
     }
     void Awake()

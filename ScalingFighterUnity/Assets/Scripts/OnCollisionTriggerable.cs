@@ -9,4 +9,9 @@ public class OnCollisionTriggerable : MonoBehaviour
         if (other.transform.TryGetComponent<ITriggerable>(out ITriggerable triggerable) == true)
             triggerable.OnCollision(this.gameObject);
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.transform.TryGetComponent<ITriggerable>(out ITriggerable triggerable) == true)
+            triggerable.OnCollision(this.gameObject);
+    }
 }

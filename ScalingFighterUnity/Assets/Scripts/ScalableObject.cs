@@ -19,7 +19,15 @@ public class ScalableObject : MonoBehaviour
     /// <summary>
     /// Smallest scale allowed
     /// </summary>
-    public float MaxScale = 10f; 
+    public float MaxScale = 10f;
+    /// <summary>
+    /// Left-click to grow
+    /// </summary>
+    public bool CanGrow = true;
+    /// <summary>
+    /// Right-click to shrink
+    /// </summary>
+    public bool CanShrink = true;
     /// <summary>
     /// Is mouse hovering inside object?
     /// </summary>
@@ -61,7 +69,7 @@ public class ScalableObject : MonoBehaviour
 
 
 
-    void OnMouseEnter()
+    public void OnMouseEnter()
     {
         MouseInside = true;
     }
@@ -83,7 +91,7 @@ public class ScalableObject : MonoBehaviour
             onMouseMiddleDown.Invoke();
         }
     }
-    void OnMouseExit()
+    public void OnMouseExit()
     {
         MouseInside = false;
     }
