@@ -7,12 +7,12 @@ using UnityEngine;
 /// </summary>
 public class ITriggerable : MonoBehaviour
 {
-    public virtual void OnTriggered(GameObject entered)
+    public virtual void OnTriggered(GameObject entered, Vector2 position)
     {
 
     }
 
-    public virtual void OnCollision(GameObject collided)
+    public virtual void OnCollision(GameObject collided, Vector2 position)
     {
 
     }

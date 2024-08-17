@@ -8,7 +8,7 @@ using UnityEngine;
 public class AssetHolder : MonoBehaviour
 {
     public Material SpriteOutlineMaterial;
-
+    public GameObject DamageAnimation;
 
     public static AssetHolder Instance;
     void Awake()
