@@ -381,7 +381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6562cbfde52744682c62c419dd67c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScaleChangeSpeed: 2
+  ScaleChangeSpeed: 4
   MinScale: 0.1
   MaxScale: 10
   MouseInside: 0
