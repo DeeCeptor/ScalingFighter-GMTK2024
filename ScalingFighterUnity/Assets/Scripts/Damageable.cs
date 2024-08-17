@@ -46,4 +46,17 @@ public class Damageable : ITriggerable
     {
         MaxHealth = Health;
     }
+
+    private void OnEnable()
+    {
+        FightManager.Instance.RegisterTarget(this);
+    }
+    private void OnDisable()
+    {
+        FightManager.Instance.RemoveTarget(this);
+    }
+    private void OnDestroy()
+    {
+        FightManager.Instance.RemoveTarget(this);
+    }
 }
