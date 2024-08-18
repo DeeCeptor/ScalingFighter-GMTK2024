@@ -16,9 +16,14 @@ public class Damageable : ITriggerable
         Debug.Log(this.transform.name + " took damage: " + amount + " remaining health " + Health, this.gameObject);
         if (Health <= 0f)
         {
-            Debug.Log(this.transform.name + " died", this.gameObject);
-            Destroy(this.gameObject);
+            Die();
         }
+    }
+    public void Die()
+    {
+        Debug.Log(this.transform.name + " died", this.gameObject);
+        FightManager.Instance.AddToScore(FightManager.ScorePerEnemy);
+        Destroy(this.gameObject);
     }
 
     private void Update()
