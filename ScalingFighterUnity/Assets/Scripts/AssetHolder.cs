@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
 using Cinemachine;
+using TMPro;
 
 /// <summary>
 /// Holds miscelaneous assets
@@ -13,6 +14,7 @@ public class AssetHolder : MonoBehaviour
     public GameObject DamageAnimation;
     public CinemachineVirtualCamera VirtualCamera;
     public CinemachineTargetGroup TargetGroup;
+    public TextMeshProUGUI ScoreText;
 
     public static AssetHolder Instance;
     void Awake()
