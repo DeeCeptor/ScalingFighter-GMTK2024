@@ -83,17 +83,17 @@ public class MoveTowardsTarget : MonoBehaviour
         else
         {
             this.transform.position = Vector3.MoveTowards(this.transform.position, destination, MovementSpeed * Time.deltaTime);
-            // Set X scale based on which side of target we're on
-            Vector3 curLocalScale = this.transform.localScale;
-            if (this.transform.position.x > Target.transform.position.x)
-            {
-                curLocalScale.x = -1f * Mathf.Abs(curLocalScale.x);
-            }
-            else
-            {
-                curLocalScale.x = 1f * Mathf.Abs(curLocalScale.x);
-            }
-            this.transform.localScale = curLocalScale;
         }
+        // Set X scale based on which side of target we're on
+        Vector3 curLocalScale = this.transform.localScale;
+        if (this.transform.position.x > Target.transform.position.x)
+        {
+            curLocalScale.x = -1f * Mathf.Abs(curLocalScale.x);
+        }
+        else
+        {
+            curLocalScale.x = 1f * Mathf.Abs(curLocalScale.x);
+        }
+        this.transform.localScale = curLocalScale;
     }
 }
