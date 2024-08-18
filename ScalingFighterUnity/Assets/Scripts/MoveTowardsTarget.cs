@@ -33,12 +33,12 @@ public class MoveTowardsTarget : MonoBehaviour
     }
 
 
-    Damageable GetClosestTarget(Damageable[] target)
+    GameObject GetClosestTarget(GameObject[] target)
     {
-        Damageable tMin = null;
+        GameObject tMin = null;
         float minDist = Mathf.Infinity;
         Vector3 currentPos = transform.position;
-        foreach (Damageable t in target)
+        foreach (GameObject t in target)
         {
             float dist = Vector3.Distance(t.transform.position, currentPos);
             if (dist < minDist)
@@ -54,7 +54,8 @@ public class MoveTowardsTarget : MonoBehaviour
         if (Target == null)
         {
             // Try to find nearest opponent
-            if (FightManager.Instance.TargetsPerTeam[OpponentTagToTarget].Count > 0)
+            if (FightManager.Instance.TargetsPerTeam.ContainsKey(OpponentTagToTarget) &&
+                FightManager.Instance.TargetsPerTeam[OpponentTagToTarget].Count > 0)
             {
                 Target = GetClosestTarget(FightManager.Instance.TargetsPerTeam[OpponentTagToTarget].ToArray()).transform;
             }

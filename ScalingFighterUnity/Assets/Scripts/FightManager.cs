@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Queues a bunch of animations. Punch, kick, etc
@@ -10,7 +11,7 @@ public class FightManager : MonoBehaviour
     /// <summary>
     /// <GameObjectTag, List<Damageable>
     /// </summary>
-    public Dictionary<string, HashSet<Damageable>> TargetsPerTeam = new Dictionary<string, HashSet<Damageable>>();
+    public Dictionary<string, HashSet<GameObject>> TargetsPerTeam = new Dictionary<string, HashSet<GameObject>>();
 
     public GameObject PlayerPrefab;
     public GameObject EnemyPrefab;
@@ -18,9 +19,7 @@ public class FightManager : MonoBehaviour
     /// Spawn boundaries for new units
     /// </summary>
     public Transform SpawnPosTopLeft, SpawnPosBottomRight;
-    
-    public Animator EnemyAnimator;
-    public Animator PlayerAnimator;
+
 
     IEnumerator ProgressCoroutine()
     {
@@ -82,6 +81,29 @@ public class FightManager : MonoBehaviour
         yield return null;
 
     }
+
+    public bool GameIsOver = false;
+    /// <summary>
+    /// SetActive if player loses
+    /// </summary>
+    public GameObject GameOverPanel;
+    public void GameOver()
+    {
+        if (GameIsOver)
+            return;
+        Debug.Log("Game over!");
+        GameIsOver = true;
+        Time.timeScale = 0f;
+        GameOverPanel.SetActive(true);
+    }
+
+    public void ReloadScene()
+    {
+        Time.timeScale = 1f;
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
+    }
+
     public Vector3 GetRandomSpawnPos()
     {
         return new Vector3(
@@ -91,13 +113,13 @@ public class FightManager : MonoBehaviour
     }
 
 
-    public void RegisterTarget(Damageable d)
+    public void RegisterTarget(GameObject d)
     {
         if (!TargetsPerTeam.ContainsKey(d.tag))
-            TargetsPerTeam[d.tag] = new HashSet<Damageable>();
+            TargetsPerTeam[d.tag] = new HashSet<GameObject>();
         TargetsPerTeam[d.tag].Add(d);
     }
-    public void RemoveTarget(Damageable d)
+    public void RemoveTarget(GameObject d)
     {
         if (!TargetsPerTeam.ContainsKey(d.tag))
             return;
@@ -117,8 +139,17 @@ public class FightManager : MonoBehaviour
         {
             Time.timeScale = 4f;
         }
+        else if (Input.GetKeyDown(KeyCode.Equals))
+        {
+            Instantiate(PlayerPrefab, GetRandomSpawnPos(), Quaternion.identity);
+        }
+        else if (Input.GetKeyDown(KeyCode.Minus))
+        {
+            Instantiate(EnemyPrefab, GetRandomSpawnPos(), Quaternion.identity);
+        }
     }
 
+    private int someNumber = 69;
     public static FightManager Instance;
     void Awake()
     {

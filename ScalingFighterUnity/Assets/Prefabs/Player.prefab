@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6778647176997111440}
   - component: {fileID: 7920324740283415540}
   m_Layer: 0
-  m_Name: TempLabel
+  m_Name: HealthText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6856078701752468073}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.1}
   m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.099999994}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -57,7 +57,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 8795246768188772629, guid: 9c979fd61b3d9d44cb94dc208b169d87, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101,15 +101,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Player
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9c979fd61b3d9d44cb94dc208b169d87, type: 2}
+  m_sharedMaterial: {fileID: 8795246768188772629, guid: 9c979fd61b3d9d44cb94dc208b169d87, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278255420
-  m_fontColor: {r: 0.23333955, g: 1, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -299,7 +299,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5612453595283723102}
-  - component: {fileID: 2913580646680226143}
   - component: {fileID: 1972731816283187187}
   - component: {fileID: 6549780705846427083}
   - component: {fileID: 1673219622804640074}
@@ -308,6 +307,7 @@ GameObject:
   - component: {fileID: 9107451223942090670}
   - component: {fileID: 6266115159871559121}
   - component: {fileID: 4484321287172195493}
+  - component: {fileID: 4120981063610100117}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -332,21 +332,6 @@ Transform:
   - {fileID: 7656199190465529150}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2913580646680226143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8996126927173958592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a828f42f0de3bdf4db89b07bb4af4ab4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 100
-  MaxHealth: 100
-  TagThatHurtsUs: EnemyHitbox
 --- !u!114 &1972731816283187187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,7 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6562cbfde52744682c62c419dd67c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScaleChangeSpeed: 4
+  ScaleChangeSpeed: 5
   MinScale: 0.1
   MaxScale: 10
   CanGrow: 1
@@ -387,7 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Movement: {fileID: 0}
-  PlayerDamage: {fileID: 2913580646680226143}
+  TagThatHurtsUs: EnemyHitbox
 --- !u!114 &1673219622804640074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,3 +526,48 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4120981063610100117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8996126927173958592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3293e5ed7944042ad660c8ffef697d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  on_pointer_enter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1972731816283187187}
+        m_TargetAssemblyTypeName: ScalableObject, Assembly-CSharp
+        m_MethodName: OnMouseEnter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  on_pointer_exit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1972731816283187187}
+        m_TargetAssemblyTypeName: ScalableObject, Assembly-CSharp
+        m_MethodName: OnMouseExit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  on_pointer_click:
+    m_PersistentCalls:
+      m_Calls: []

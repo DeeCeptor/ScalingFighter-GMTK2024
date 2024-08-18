@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Damageable : ITriggerable
@@ -7,7 +8,7 @@ public class Damageable : ITriggerable
     public float Health = 3f;
     public float MaxHealth = 3f;
     public string TagThatHurtsUs;
-
+    public TextMeshPro HealthText;
 
     public void AlterHealth(float amount)
     {
@@ -20,8 +21,14 @@ public class Damageable : ITriggerable
         }
     }
 
+    private void Update()
+    {
+        if (HealthText != null)
+            HealthText.text = "" + Health;
+    }
 
-    public void TakeHit(Vector3 position)
+
+    public virtual void TakeHit(Vector3 position)
     {
         AlterHealth(-20f);
         GameObject obj = (GameObject)Instantiate(AssetHolder.Instance.DamageAnimation, position, Quaternion.identity);
@@ -49,14 +56,14 @@ public class Damageable : ITriggerable
 
     private void OnEnable()
     {
-        FightManager.Instance.RegisterTarget(this);
+        FightManager.Instance.RegisterTarget(this.gameObject);
     }
     private void OnDisable()
     {
-        FightManager.Instance.RemoveTarget(this);
+        FightManager.Instance.RemoveTarget(this.gameObject);
     }
     private void OnDestroy()
     {
-        FightManager.Instance.RemoveTarget(this);
+        FightManager.Instance.RemoveTarget(this.gameObject);
     }
 }
