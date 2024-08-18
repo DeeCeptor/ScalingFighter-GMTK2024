@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Damageable : ITriggerable
@@ -7,7 +8,7 @@ public class Damageable : ITriggerable
     public float Health = 3f;
     public float MaxHealth = 3f;
     public string TagThatHurtsUs;
-
+    public TextMeshPro HealthText;
 
     public void AlterHealth(float amount)
     {
@@ -18,6 +19,12 @@ public class Damageable : ITriggerable
             Debug.Log(this.transform.name + " died", this.gameObject);
             Destroy(this.gameObject);
         }
+    }
+
+    private void Update()
+    {
+        if (HealthText != null)
+            HealthText.text = "" + Health;
     }
 
 

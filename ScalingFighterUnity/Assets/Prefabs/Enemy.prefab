@@ -175,6 +175,7 @@ MonoBehaviour:
   Health: 50
   MaxHealth: 50
   TagThatHurtsUs: PlayerHitbox
+  HealthText: {fileID: 20950008207162733}
 --- !u!114 &8074969945299970660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,7 +368,7 @@ GameObject:
   - component: {fileID: 7589692285563210727}
   - component: {fileID: 20950008207162733}
   m_Layer: 0
-  m_Name: TempLabel
+  m_Name: HealthText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -412,7 +413,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 8795246768188772629, guid: 9c979fd61b3d9d44cb94dc208b169d87, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -456,15 +457,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Enemy
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9c979fd61b3d9d44cb94dc208b169d87, type: 2}
+  m_sharedMaterial: {fileID: 8795246768188772629, guid: 9c979fd61b3d9d44cb94dc208b169d87, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190335
-  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
