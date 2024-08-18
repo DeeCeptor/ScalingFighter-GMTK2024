@@ -301,6 +301,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MichaelPrefabInEveryScene
       objectReference: {fileID: 0}
+    - target: {fileID: 4814215816385447748, guid: 189f6ae9e3e2c1c4aafd7f5f37fbd9c0, type: 3}
+      propertyPath: destroy_when_finished
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6126401231252907996, guid: 189f6ae9e3e2c1c4aafd7f5f37fbd9c0, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.000030517578
@@ -497,9 +501,6 @@ PrefabInstance:
       addedObject: {fileID: 229461097}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2882037859651242816, guid: 189f6ae9e3e2c1c4aafd7f5f37fbd9c0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 4897268732708214146, guid: 189f6ae9e3e2c1c4aafd7f5f37fbd9c0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 189f6ae9e3e2c1c4aafd7f5f37fbd9c0, type: 3}

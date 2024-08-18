@@ -49,6 +49,8 @@ public class FightManager : MonoBehaviour
         while (!Player.Instance.Scaling.HasBeenLeftClicked)
             yield return null;
         VNSceneManager.scene_manager.Button_Pressed();
+        yield return null;
+        VNSceneManager.scene_manager.Show_UI(false);
     }
 
     IEnumerator ProgressCoroutine()
@@ -65,7 +67,7 @@ public class FightManager : MonoBehaviour
         // Spawn enemy (left side)
         SpawnPrefab(EnemyPrefab, true, specificPos: SpawnPosTopLeft.position);
 
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
         // Spawn enemy (right side)
         SpawnPrefab(EnemyPrefab, false, specificPos: SpawnPosBottomRight.position);
 
@@ -79,14 +81,14 @@ public class FightManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         // Spawn enemy
         SpawnPrefab(EnemyPrefab, false, specificPos:new Vector3(0, 10f, 0f));
-        yield return new WaitForSeconds(15f);
+        yield return new WaitForSeconds(4f);
         // Spawn enemy (left side)
         SpawnPrefab(EnemyPrefab, false);
-        SpawnPrefab(EnemyPrefab, false);
+        SpawnPrefab(EnemyPrefab, true);
 
         // Spawn enemies indefinitely, faster and faster
-        float minSpawnTime = 10f;   // In seconds
-        float maxSpawnTime = 20f;
+        float minSpawnTime = 7f;   // In seconds
+        float maxSpawnTime = 13f;
         int loopNumber = 0;
         while (true)
         {
