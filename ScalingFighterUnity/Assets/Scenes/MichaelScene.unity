@@ -579,6 +579,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1384764401}
   - component: {fileID: 1384764402}
+  - component: {fileID: 1384764403}
   m_Layer: 0
   m_Name: FightManager
   m_TagString: Untagged
@@ -615,6 +616,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyAnimator: {fileID: 1255610106}
   PlayerAnimator: {fileID: 2488272943583027247}
+--- !u!95 &1384764403
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384764400}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 69b57b156dde4cd46b3a343159a32400, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1515155145
 GameObject:
   m_ObjectHideFlags: 0

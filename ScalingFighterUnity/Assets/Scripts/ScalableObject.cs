@@ -42,7 +42,7 @@ public class ScalableObject : MonoBehaviour
     public void ChangeSize(float amount)
     {
         this.transform.localScale = new Vector3(
-            Mathf.Clamp(this.transform.localScale.x + amount, MinScale, MaxScale)
+            Mathf.Sign(this.transform.localScale.x) * Mathf.Clamp((Mathf.Abs(this.transform.localScale.x) + amount), MinScale, MaxScale)
             , Mathf.Clamp(this.transform.localScale.y + amount, MinScale, MaxScale)
             , Mathf.Clamp(this.transform.localScale.z + amount, MinScale, MaxScale));
     }
