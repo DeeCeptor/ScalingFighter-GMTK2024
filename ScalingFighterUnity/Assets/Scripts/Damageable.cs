@@ -46,7 +46,12 @@ public class Damageable : ITriggerable
         if (from != null)
         {
             // Check scale of enemy to influence damage
-            damage = -Mathf.Abs(from.transform.localPosition.x);
+            Damageable unitHittingUs = from.GetComponentInParent<Damageable>();
+            if (unitHittingUs != null)
+            {
+                damage = -Mathf.Abs(unitHittingUs.transform.localScale.x);
+                Debug.Log("TakeHit from scaled object " + unitHittingUs.transform.name + " " + damage, unitHittingUs.gameObject);
+            }
         }
         AlterHealth(damage);
         GameObject obj = (GameObject)Instantiate(AssetHolder.Instance.DamageAnimation, position, Quaternion.identity);

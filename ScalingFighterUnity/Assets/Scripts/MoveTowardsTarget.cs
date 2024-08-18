@@ -26,6 +26,10 @@ public class MoveTowardsTarget : MonoBehaviour
     /// Tag of enemy Damageable to move towards
     /// </summary>
     public string OpponentTagToTarget;
+    /// <summary>
+    /// Periodically set Random float parameter to determine if we'll kick or punch
+    /// </summary>
+    public Animator Anims;
 
     public void SetTarget(Transform t)
     {
@@ -102,5 +106,10 @@ public class MoveTowardsTarget : MonoBehaviour
             curLocalScale.x = 1f * Mathf.Abs(curLocalScale.x);
         }
         this.transform.localScale = curLocalScale;
+
+        if (Anims != null)
+        {
+            Anims.SetFloat("Random", Random.Range(0f, 1f));
+        }
     }
 }
