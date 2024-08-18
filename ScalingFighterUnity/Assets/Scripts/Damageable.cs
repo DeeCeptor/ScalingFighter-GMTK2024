@@ -9,6 +9,7 @@ public class Damageable : ITriggerable
     public float MaxHealth = 3f;
     public string TagThatHurtsUs;
     public TextMeshPro HealthText;
+    public bool Dead = false;
 
     public void AlterHealth(float amount)
     {
@@ -23,6 +24,7 @@ public class Damageable : ITriggerable
     {
         Debug.Log(this.transform.name + " died", this.gameObject);
         FightManager.Instance.AddToScore(FightManager.ScorePerEnemy);
+        this.Dead = true;
         Destroy(this.gameObject);
     }
 
