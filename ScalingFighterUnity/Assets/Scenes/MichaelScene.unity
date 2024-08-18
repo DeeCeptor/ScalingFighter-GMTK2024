@@ -476,7 +476,7 @@ Transform:
   m_GameObject: {fileID: 75309045}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25, y: 0, z: 0}
+  m_LocalPosition: {x: -20, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1060,7 +1060,7 @@ Transform:
   m_GameObject: {fileID: 1171807323}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25, y: 0, z: 0}
+  m_LocalPosition: {x: 20, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1204,8 +1204,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 8996126927173958592, guid: bbdf04c8d2c3039428c2891ba299c89b, type: 3}
   EnemyPrefab: {fileID: 4319439290098348519, guid: ce35b86c58879ce43b5147d21080ff7b, type: 3}
-  SpawnPosLeft: {fileID: 75309046}
-  SpawnPosRight: {fileID: 1171807324}
+  SpawnPosTopLeft: {fileID: 75309046}
+  SpawnPosBottomRight: {fileID: 1171807324}
   EnemyAnimator: {fileID: 1255610106}
   PlayerAnimator: {fileID: 2488272943583027247}
 --- !u!95 &1384764403
