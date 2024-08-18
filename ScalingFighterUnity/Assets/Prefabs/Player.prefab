@@ -308,6 +308,7 @@ GameObject:
   - component: {fileID: 9107451223942090670}
   - component: {fileID: 6266115159871559121}
   - component: {fileID: 4484321287172195493}
+  - component: {fileID: 4120981063610100117}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -542,3 +543,48 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4120981063610100117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8996126927173958592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3293e5ed7944042ad660c8ffef697d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  on_pointer_enter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1972731816283187187}
+        m_TargetAssemblyTypeName: ScalableObject, Assembly-CSharp
+        m_MethodName: OnMouseEnter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  on_pointer_exit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1972731816283187187}
+        m_TargetAssemblyTypeName: ScalableObject, Assembly-CSharp
+        m_MethodName: OnMouseExit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  on_pointer_click:
+    m_PersistentCalls:
+      m_Calls: []
