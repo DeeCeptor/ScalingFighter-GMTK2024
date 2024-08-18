@@ -26,7 +26,7 @@ public class Damageable : ITriggerable
         AlterHealth(-20f);
         GameObject obj = (GameObject)Instantiate(AssetHolder.Instance.DamageAnimation, position, Quaternion.identity);
     }
-    public override void OnTriggered(GameObject collided, Vector2 position)
+    public override void OnTriggered(GameObject collided, Vector3 position)
     {
         base.OnTriggered(collided, position);
         if (collided.CompareTag(TagThatHurtsUs))
@@ -34,7 +34,7 @@ public class Damageable : ITriggerable
             TakeHit(position);
         }
     }
-    public override void OnCollision(GameObject collided, Vector2 position)
+    public override void OnCollision(GameObject collided, Vector3 position)
     {
         base.OnCollision(collided, position);
         if (collided.CompareTag(TagThatHurtsUs))

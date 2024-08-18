@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// Moves towards target, sets their scale based on which side player is on so attacks punch right now. Needs a different script to set target
@@ -52,21 +54,35 @@ public class MoveTowardsTarget : MonoBehaviour
         if (Target == null)
         {
             // Try to find nearest opponent
-            Target = GetClosestTarget(FightManager.Instance.TargetsPerTeam[OpponentTagToTarget].ToArray()).transform;
+            if (FightManager.Instance.TargetsPerTeam[OpponentTagToTarget].Count > 0)
+            {
+                Target = GetClosestTarget(FightManager.Instance.TargetsPerTeam[OpponentTagToTarget].ToArray()).transform;
+            }
         }
         if (Target == null)
             return;
+
+        Vector3 destination = Target.transform.position;
+        // We want to be EITHER on left side or RIGHT of target, whichever's closest
+        Vector3 leftSide = destination + new Vector3(-GetWithinTargetDist, 0f, 0f);
+        Vector3 rightSide = destination + new Vector3(GetWithinTargetDist, 0f, 0f);
+        
+        if (Vector3.Distance(this.transform.position, leftSide) < Vector3.Distance(this.transform.position, rightSide))
+        {
+            destination = leftSide;
+        }
+        else
+            destination = rightSide;
+
         // Maybe backup if too close?
-        if (Vector2.Distance(this.transform.position, Target.transform.position) <= GetWithinTargetDist)
+        if (Mathf.Abs(this.transform.position.x - destination.x) <= GetWithinTargetDist
+            && Mathf.Abs(this.transform.position.z - destination.z) <= .01f)
         {
             // Stop moving
         }
         else
         {
-            // Move towards target
-            float desiredXPos = Mathf.MoveTowards(this.transform.position.x, Target.transform.position.x, MovementSpeed * Time.deltaTime);
-            Vector3 newPos = new Vector3(desiredXPos, this.transform.position.y, this.transform.position.z);
-            this.transform.position = newPos;
+            this.transform.position = Vector3.MoveTowards(this.transform.position, destination, MovementSpeed * Time.deltaTime);
             // Set X scale based on which side of target we're on
             Vector3 curLocalScale = this.transform.localScale;
             if (this.transform.position.x > Target.transform.position.x)
