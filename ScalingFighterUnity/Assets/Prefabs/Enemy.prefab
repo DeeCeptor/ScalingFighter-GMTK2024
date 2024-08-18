@@ -130,9 +130,7 @@ GameObject:
   - component: {fileID: 3711442239266802331}
   - component: {fileID: 3720911372228421072}
   - component: {fileID: 8074969945299970660}
-  - component: {fileID: 8082912696102642165}
   - component: {fileID: 5846253566923934894}
-  - component: {fileID: 8875774488479385611}
   - component: {fileID: 1065513841160761641}
   - component: {fileID: 7468435275476088732}
   - component: {fileID: 7912252275878690282}
@@ -190,35 +188,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   MovementSpeed: 1.5
-  GetWithinTargetDist: 3
+  GetWithinTargetDist: 6
   OpponentTagToTarget: Player
---- !u!114 &8082912696102642165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4319439290098348519}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a6562cbfde52744682c62c419dd67c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ScaleChangeSpeed: 4
-  MinScale: 0.1
-  MaxScale: 10
-  CanGrow: 1
-  CanShrink: 1
-  MouseInside: 0
-  onMouseLeftDown:
-    m_PersistentCalls:
-      m_Calls: []
-  onMouseRightDown:
-    m_PersistentCalls:
-      m_Calls: []
-  onMouseMiddleDown:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!212 &5846253566923934894
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -271,20 +242,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8875774488479385611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4319439290098348519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34cf486f55beed648a8c1ff189815063, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Sprite: {fileID: 0}
-  DefaultMaterial: {fileID: 0}
 --- !u!95 &1065513841160761641
 Animator:
   serializedVersion: 5

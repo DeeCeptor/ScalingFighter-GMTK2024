@@ -33,44 +33,44 @@ public class FightManager : MonoBehaviour
 
         Debug.Log("Spawning two enemies");
         // Spawn enemy (left side)
-        Instantiate(EnemyPrefab, SpawnPosTopLeft.position, Quaternion.identity);
+        SpawnPrefab(EnemyPrefab, false, specificPos: SpawnPosTopLeft.position);
 
         yield return new WaitForSeconds(10f);
         // Spawn enemy (right side)
-        Instantiate(EnemyPrefab, SpawnPosBottomRight.position, Quaternion.identity);
+        SpawnPrefab(EnemyPrefab, false, specificPos: SpawnPosBottomRight.position);
 
         while (TargetsPerTeam["Enemy"].Count > 0)
             yield return null;
         Debug.Log("Spawning friendly");
         // Spawn friendly
-        Instantiate(PlayerPrefab, GetRandomSpawnPos(), Quaternion.identity);
+        SpawnPrefab(PlayerPrefab, false);
+
         // Wait
         yield return new WaitForSeconds(2f);
         // Spawn enemy
-        Instantiate(EnemyPrefab, Vector3.zero, Quaternion.identity);
+        SpawnPrefab(EnemyPrefab, false, specificPos:new Vector3(0, 10f, 0f));
         yield return new WaitForSeconds(15f);
         // Spawn enemy (left side)
-        Instantiate(EnemyPrefab, GetRandomSpawnPos(), Quaternion.identity);
-        // Spawn enemy (right side)
-        Instantiate(EnemyPrefab, GetRandomSpawnPos(), Quaternion.identity);
+        SpawnPrefab(EnemyPrefab, false);
+        SpawnPrefab(EnemyPrefab, false);
 
         // Spawn enemies indefinitely, faster and faster
         float minSpawnTime = 10f;   // In seconds
-        float maxSpawnTime = 30f;
+        float maxSpawnTime = 20f;
         int loopNumber = 0;
         while (true)
         {
-            Instantiate(EnemyPrefab, GetRandomSpawnPos(), Quaternion.identity);
+            SpawnPrefab(EnemyPrefab, true);
             yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
-            Instantiate(EnemyPrefab, GetRandomSpawnPos(), Quaternion.identity);
+            SpawnPrefab(EnemyPrefab, true);
             yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
-            Instantiate(EnemyPrefab, GetRandomSpawnPos(), Quaternion.identity);
+            SpawnPrefab(EnemyPrefab, true);
             yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
-            Instantiate(EnemyPrefab, GetRandomSpawnPos(), Quaternion.identity);
+            SpawnPrefab(EnemyPrefab, true);
             yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
             // Give player new friendly if count is low enough
             if (TargetsPerTeam["Player"].Count < 3)
-                Instantiate(PlayerPrefab, GetRandomSpawnPos(), Quaternion.identity);
+                SpawnPrefab(PlayerPrefab, false);
 
             // Make them spawn faster
             minSpawnTime = Mathf.Max(5f, minSpawnTime - 1f);
@@ -80,6 +80,25 @@ public class FightManager : MonoBehaviour
 
         yield return null;
 
+    }
+    /// <summary>
+    /// Spawns given prefab, with optional random scale. If no specificPos given, random position is used
+    /// </summary>
+    /// <param name="prefab"></param>
+    /// <param name="randomScale"></param>
+    /// <param name="specificPos"></param>
+    public GameObject SpawnPrefab(GameObject prefab, bool randomScale, Vector3 specificPos=default(Vector3))
+    {
+        Vector3 spawnPos = specificPos;
+        if (spawnPos == default(Vector3))
+            spawnPos = GetRandomSpawnPos();
+        GameObject newObj = (GameObject)Instantiate(prefab, spawnPos, Quaternion.identity);
+        if (randomScale)
+        {
+            float newScale = Random.Range(0.4f, 4f);
+            newObj.transform.localScale = Vector3.one * newScale;
+        }
+        return newObj;
     }
 
     public bool GameIsOver = false;
