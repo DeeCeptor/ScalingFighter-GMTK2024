@@ -149,6 +149,7 @@ public class FightManager : MonoBehaviour
         }
     }
 
+    private int someNumber = 69;
     public static FightManager Instance;
     void Awake()
     {
