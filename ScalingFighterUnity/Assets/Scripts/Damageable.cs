@@ -28,7 +28,7 @@ public class Damageable : ITriggerable
     }
 
 
-    public void TakeHit(Vector3 position)
+    public virtual void TakeHit(Vector3 position)
     {
         AlterHealth(-20f);
         GameObject obj = (GameObject)Instantiate(AssetHolder.Instance.DamageAnimation, position, Quaternion.identity);
@@ -56,14 +56,14 @@ public class Damageable : ITriggerable
 
     private void OnEnable()
     {
-        FightManager.Instance.RegisterTarget(this);
+        FightManager.Instance.RegisterTarget(this.gameObject);
     }
     private void OnDisable()
     {
-        FightManager.Instance.RemoveTarget(this);
+        FightManager.Instance.RemoveTarget(this.gameObject);
     }
     private void OnDestroy()
     {
-        FightManager.Instance.RemoveTarget(this);
+        FightManager.Instance.RemoveTarget(this.gameObject);
     }
 }

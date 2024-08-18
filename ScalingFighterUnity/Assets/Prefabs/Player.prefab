@@ -299,7 +299,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5612453595283723102}
-  - component: {fileID: 2913580646680226143}
   - component: {fileID: 1972731816283187187}
   - component: {fileID: 6549780705846427083}
   - component: {fileID: 1673219622804640074}
@@ -333,22 +332,6 @@ Transform:
   - {fileID: 7656199190465529150}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2913580646680226143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8996126927173958592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a828f42f0de3bdf4db89b07bb4af4ab4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 100
-  MaxHealth: 100
-  TagThatHurtsUs: EnemyHitbox
-  HealthText: {fileID: 7920324740283415540}
 --- !u!114 &1972731816283187187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,7 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Movement: {fileID: 0}
-  PlayerDamage: {fileID: 2913580646680226143}
+  TagThatHurtsUs: EnemyHitbox
 --- !u!114 &1673219622804640074
 MonoBehaviour:
   m_ObjectHideFlags: 0

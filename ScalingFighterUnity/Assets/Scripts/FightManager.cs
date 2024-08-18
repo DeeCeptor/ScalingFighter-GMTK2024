@@ -11,7 +11,7 @@ public class FightManager : MonoBehaviour
     /// <summary>
     /// <GameObjectTag, List<Damageable>
     /// </summary>
-    public Dictionary<string, HashSet<Damageable>> TargetsPerTeam = new Dictionary<string, HashSet<Damageable>>();
+    public Dictionary<string, HashSet<GameObject>> TargetsPerTeam = new Dictionary<string, HashSet<GameObject>>();
 
     public GameObject PlayerPrefab;
     public GameObject EnemyPrefab;
@@ -19,9 +19,7 @@ public class FightManager : MonoBehaviour
     /// Spawn boundaries for new units
     /// </summary>
     public Transform SpawnPosTopLeft, SpawnPosBottomRight;
-    
-    public Animator EnemyAnimator;
-    public Animator PlayerAnimator;
+
 
     IEnumerator ProgressCoroutine()
     {
@@ -89,21 +87,14 @@ public class FightManager : MonoBehaviour
     /// SetActive if player loses
     /// </summary>
     public GameObject GameOverPanel;
-    IEnumerator GameOverChecker()
+    public void GameOver()
     {
-        yield return new WaitForSeconds(0.5f);
-        yield return null;
-        while (true)
-        {
-            yield return null;
-            if (!GameIsOver && TargetsPerTeam["Player"].Count <= 0)
-            {
-                Debug.Log("Game over!");
-                GameIsOver = true;
-                Time.timeScale = 0f;
-                GameOverPanel.SetActive(true);
-            }
-        }
+        if (GameIsOver)
+            return;
+        Debug.Log("Game over!");
+        GameIsOver = true;
+        Time.timeScale = 0f;
+        GameOverPanel.SetActive(true);
     }
 
     public void ReloadScene()
@@ -122,13 +113,13 @@ public class FightManager : MonoBehaviour
     }
 
 
-    public void RegisterTarget(Damageable d)
+    public void RegisterTarget(GameObject d)
     {
         if (!TargetsPerTeam.ContainsKey(d.tag))
-            TargetsPerTeam[d.tag] = new HashSet<Damageable>();
+            TargetsPerTeam[d.tag] = new HashSet<GameObject>();
         TargetsPerTeam[d.tag].Add(d);
     }
-    public void RemoveTarget(Damageable d)
+    public void RemoveTarget(GameObject d)
     {
         if (!TargetsPerTeam.ContainsKey(d.tag))
             return;
@@ -163,7 +154,6 @@ public class FightManager : MonoBehaviour
     {
         Instance = this;
         StartCoroutine(ProgressCoroutine());
-        StartCoroutine(GameOverChecker());
         /*
         AnimationManager.AddAnim(AnimationManager.Instance.PlayAndFinishAnimation(EnemyAnimator, "PunchLeft"));
         AnimationManager.AddAnim(AnimationManager.Instance.PlayAndFinishAnimation(PlayerAnimator, "PunchRight"));

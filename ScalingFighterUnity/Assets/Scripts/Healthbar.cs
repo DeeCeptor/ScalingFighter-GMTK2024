@@ -6,7 +6,7 @@ using TMPro;
 
 
 /// <summary>
-/// Healthbar showing player health. Hold click to regrow/heal
+/// Healthbar showing player health. Communal. ANY player character taking a hit lowers this
 /// </summary>
 public class Healthbar : MonoBehaviour
 {
@@ -15,20 +15,19 @@ public class Healthbar : MonoBehaviour
 
     void Update()
     {
-        // If player health changed, change scale
-        if (Player.Instance.PlayerDamage.Health != prevPlayerHealth)
-        {
-            this.transform.localScale = Player.Instance.PlayerDamage.Health * Vector3.one / 100f;
-        }
         HealthText.text = "" + (int)(this.transform.localScale.x * 100f);
-        prevPlayerHealth = Player.Instance.PlayerDamage.Health;
+        if (this.transform.localScale.x < 0.05f)
+        {
+            // Game over!
+            FightManager.Instance.GameOver();
+        }
     }
     /// <summary>
     /// Set player health based on current scale
     /// </summary>
-    public void PlayerClickedHealthbar()
+    public void TakeHit()
     {
-        Player.Instance.PlayerDamage.Health = (this.transform.localScale.x * 100f);
+        this.transform.localScale -= Vector3.one * 0.1f;
     }
 
     public static Healthbar Instance;
