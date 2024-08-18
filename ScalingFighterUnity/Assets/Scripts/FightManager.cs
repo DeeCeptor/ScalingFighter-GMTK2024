@@ -148,6 +148,14 @@ public class FightManager : MonoBehaviour
         {
             Time.timeScale = 4f;
         }
+        else if (Input.GetKeyDown(KeyCode.Equals))
+        {
+            Instantiate(PlayerPrefab, GetRandomSpawnPos(), Quaternion.identity);
+        }
+        else if (Input.GetKeyDown(KeyCode.Minus))
+        {
+            Instantiate(EnemyPrefab, GetRandomSpawnPos(), Quaternion.identity);
+        }
     }
 
     public static FightManager Instance;

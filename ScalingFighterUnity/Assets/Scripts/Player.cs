@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -19,5 +20,7 @@ public class Player : ITriggerable
         Instance = this;
         if (Movement == null)
             Movement = this.GetComponent<MoveTowardsTarget>();
+        // Add self to cinemachine target group
+        AssetHolder.Instance.TargetGroup.AddMember(this.transform, 1f, 1f);
     }
 }
