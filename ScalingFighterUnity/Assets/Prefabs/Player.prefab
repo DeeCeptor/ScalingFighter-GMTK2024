@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleChangeSpeed: 5
-  MinScale: 0.1
+  MinScale: 0.2
   MaxScale: 10
   CanGrow: 1
   CanShrink: 1
@@ -387,7 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   MovementSpeed: 1.5
-  GetWithinTargetDist: 3
+  GetWithinTargetDist: 2
   OpponentTagToTarget: Enemy
 --- !u!212 &3537977911240204135
 SpriteRenderer:

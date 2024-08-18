@@ -63,11 +63,17 @@ public class MoveTowardsTarget : MonoBehaviour
         if (Target == null)
             return;
 
+        // Decide exactly WHERE we want to stand
         Vector3 destination = Target.transform.position;
-        // We want to be EITHER on left side or RIGHT of target, whichever's closest
-        Vector3 leftSide = destination + new Vector3(-GetWithinTargetDist, 0f, 0f);
-        Vector3 rightSide = destination + new Vector3(GetWithinTargetDist, 0f, 0f);
-        
+        // We want to stand on EITHER left side or RIGHT of target, whichever's closest
+        // Stand close or further based on our scale
+        // PROBLEM: enemies also try to adjust their punching distance based on their size, so BOTH move. Maybe don't move if close enough to destination?
+        // If smaller, need to stand CLOSER, not further away
+        float actualDistanceWeWant = GetWithinTargetDist * Mathf.Abs(this.transform.localScale.x);
+        Vector3 offset = new Vector3(actualDistanceWeWant, 0f, 0f);
+        Vector3 leftSide = destination - offset;
+        Vector3 rightSide = destination + offset;
+
         if (Vector3.Distance(this.transform.position, leftSide) < Vector3.Distance(this.transform.position, rightSide))
         {
             destination = leftSide;
@@ -76,10 +82,10 @@ public class MoveTowardsTarget : MonoBehaviour
             destination = rightSide;
 
         // Maybe backup if too close?
-        if (Mathf.Abs(this.transform.position.x - destination.x) <= GetWithinTargetDist
+        if (Mathf.Abs(this.transform.position.x - destination.x) <= actualDistanceWeWant
             && Mathf.Abs(this.transform.position.z - destination.z) <= .01f)
         {
-            // Stop moving
+            // Stop moving, close enough
         }
         else
         {
