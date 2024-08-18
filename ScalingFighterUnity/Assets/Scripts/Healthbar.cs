@@ -12,6 +12,10 @@ public class Healthbar : MonoBehaviour
 {
     public TextMeshProUGUI HealthText;
     float prevPlayerHealth;
+    /// <summary>
+    /// Enable at low health
+    /// </summary>
+    public GameObject LowHealthAlert;
 
     void Update()
     {
@@ -21,6 +25,7 @@ public class Healthbar : MonoBehaviour
             // Game over!
             FightManager.Instance.GameOver();
         }
+        LowHealthAlert.SetActive(this.transform.localScale.x < 0.4f);
     }
     /// <summary>
     /// Set player health based on current scale

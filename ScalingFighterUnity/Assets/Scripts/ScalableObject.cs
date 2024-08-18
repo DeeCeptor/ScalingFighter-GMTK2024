@@ -38,6 +38,8 @@ public class ScalableObject : MonoBehaviour
     public Button.ButtonClickedEvent onMouseLeftDown;
     public Button.ButtonClickedEvent onMouseRightDown;
     public Button.ButtonClickedEvent onMouseMiddleDown;
+    public bool HasBeenLeftClicked = false;
+    public bool HasBeenRightClicked = false;
 
     public void ChangeSize(float amount)
     {
@@ -56,12 +58,14 @@ public class ScalableObject : MonoBehaviour
             {
                 if (onMouseLeftDown != null)
                     onMouseLeftDown.Invoke();
+                HasBeenLeftClicked = true;
                 this.ChangeSize(ScaleChangeSpeed * Time.deltaTime);
             }
             else if (Input.GetMouseButton(1))
             {
                 if (onMouseRightDown != null)
                     onMouseRightDown.Invoke();
+                HasBeenRightClicked = true;
                 this.ChangeSize(-ScaleChangeSpeed * Time.deltaTime);
             }
         }

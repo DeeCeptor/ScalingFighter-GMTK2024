@@ -9,6 +9,7 @@ using UnityEngine;
 public class Player : ITriggerable
 {
     public MoveTowardsTarget Movement;
+    public ScalableObject Scaling;
     /// <summary>
     /// Gameobject tag on enemy colliders
     /// </summary>

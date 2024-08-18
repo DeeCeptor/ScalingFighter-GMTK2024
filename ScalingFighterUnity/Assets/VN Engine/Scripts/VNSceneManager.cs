@@ -43,8 +43,11 @@ public class VNSceneManager : MonoBehaviour
             while (conversation_log.Length > log_character_limit)
                 conversation_log = conversation_log.Substring(conversation_log.IndexOf("\n") + 1);
 
-            UIManager.ui_manager.log_text.text = conversation_log;
-            UIManager.ui_manager.scroll_log.text = conversation_log;
+            if (UIManager.ui_manager.log_text != null)
+            {
+                UIManager.ui_manager.log_text.text = conversation_log;
+                UIManager.ui_manager.scroll_log.text = conversation_log;
+            }
         }
     }
     private int log_character_limit = 5000;     // Unity's UI Text has a limit to how many characters can be displayed. If this is too high, you'll start getting errors
