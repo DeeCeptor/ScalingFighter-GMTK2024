@@ -837,6 +837,7 @@ MonoBehaviour:
   DamageAnimation: {fileID: 8135722111927175274, guid: fbfa82782fe21ab4e9a4eec05bc5b055, type: 3}
   VirtualCamera: {fileID: 1371746176032225383}
   TargetGroup: {fileID: 1757408862723065377}
+  ScoreText: {fileID: 8338122670941109375}
 --- !u!1 &3026689449231674634
 GameObject:
   m_ObjectHideFlags: 0

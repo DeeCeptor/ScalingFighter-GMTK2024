@@ -9,6 +9,22 @@ using UnityEngine.SceneManagement;
 public class FightManager : MonoBehaviour
 {
     /// <summary>
+    /// Defeating an enemy gives 1 score
+    /// </summary>
+    public int Score = 0;
+    /// <summary>
+    /// Defeating one enemy gives this much score
+    /// </summary>
+    public const int ScorePerEnemy = 100;
+
+    public void AddToScore(int amount)
+    {
+        Score += amount;
+        // Update visible score text
+        AssetHolder.Instance.ScoreText.text = "" + Score;
+    }
+
+    /// <summary>
     /// <GameObjectTag, List<Damageable>
     /// </summary>
     public Dictionary<string, HashSet<GameObject>> TargetsPerTeam = new Dictionary<string, HashSet<GameObject>>();
