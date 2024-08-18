@@ -29,13 +29,24 @@ public class Damageable : ITriggerable
     private void Update()
     {
         if (HealthText != null)
-            HealthText.text = "" + Health;
+            HealthText.text = "" + Health.ToString("0.0");
     }
 
 
-    public virtual void TakeHit(Vector3 position)
+    /// <summary>
+    /// Deal damage based on SCALE of enemy
+    /// </summary>
+    /// <param name="position"></param>
+    /// <param name="from"></param>
+    public virtual void TakeHit(Vector3 position, GameObject from)
     {
-        AlterHealth(-20f);
+        float damage = -20f;
+        if (from != null)
+        {
+            // Check scale of enemy to influence damage
+            damage = -Mathf.Abs(from.transform.localPosition.x);
+        }
+        AlterHealth(damage);
         GameObject obj = (GameObject)Instantiate(AssetHolder.Instance.DamageAnimation, position, Quaternion.identity);
     }
     public override void OnTriggered(GameObject collided, Vector3 position)
@@ -43,7 +54,7 @@ public class Damageable : ITriggerable
         base.OnTriggered(collided, position);
         if (collided.CompareTag(TagThatHurtsUs))
         {
-            TakeHit(position);
+            TakeHit(position, collided);
         }
     }
     public override void OnCollision(GameObject collided, Vector3 position)
@@ -51,7 +62,7 @@ public class Damageable : ITriggerable
         base.OnCollision(collided, position);
         if (collided.CompareTag(TagThatHurtsUs))
         {
-            TakeHit(position);
+            TakeHit(position, collided);
         }
     }
     void Awake()

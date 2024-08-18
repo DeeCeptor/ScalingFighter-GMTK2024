@@ -6,14 +6,11 @@ using UnityEngine;
 /// <summary>
 /// Player can take damage, moves towards nearest enemy
 /// </summary>
-public class Player : ITriggerable
+public class Player : Damageable
 {
     public MoveTowardsTarget Movement;
     public ScalableObject Scaling;
-    /// <summary>
-    /// Gameobject tag on enemy colliders
-    /// </summary>
-    public string TagThatHurtsUs;
+
 
     public static Player Instance;
     void Awake()
@@ -30,13 +27,18 @@ public class Player : ITriggerable
         FightManager.Instance.RemoveTarget(this.gameObject);
     }
 
+    public override void TakeHit(Vector3 position, GameObject from)
+    {
+        base.TakeHit(position, from);
+        Healthbar.Instance.TakeHit();
+    }
+    /*
     public override void OnTriggered(GameObject entered, Vector3 position)
     {
         base.OnTriggered(entered, position);
         if (entered.CompareTag(TagThatHurtsUs))
         {
             // Lower communal player health
-            Healthbar.Instance.TakeHit();
             GameObject obj = (GameObject)Instantiate(AssetHolder.Instance.DamageAnimation, position, Quaternion.identity);
         }
     }
@@ -50,4 +52,5 @@ public class Player : ITriggerable
             GameObject obj = (GameObject)Instantiate(AssetHolder.Instance.DamageAnimation, position, Quaternion.identity);
         }
     }
+    */
 }
