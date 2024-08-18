@@ -359,6 +359,8 @@ MonoBehaviour:
   onMouseMiddleDown:
     m_PersistentCalls:
       m_Calls: []
+  HasBeenLeftClicked: 0
+  HasBeenRightClicked: 0
 --- !u!114 &6549780705846427083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,7 +373,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb9e5df1b998404c81d84ad70d6eb9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Movement: {fileID: 0}
+  Movement: {fileID: 1673219622804640074}
+  Scaling: {fileID: 1972731816283187187}
   TagThatHurtsUs: EnemyHitbox
 --- !u!114 &1673219622804640074
 MonoBehaviour:

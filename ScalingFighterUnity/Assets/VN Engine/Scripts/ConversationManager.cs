@@ -25,7 +25,8 @@ public class ConversationManager : MonoBehaviour
 
 	// Simply start the first node to get this conversation going
 	public void Start_Conversation()
-	{    
+	{
+        Debug.Log("Start_Conversation " + this.transform.name);
 		// Reset the previous conversation if there is one
 		if (VNSceneManager.current_conversation != null && VNSceneManager.current_conversation.active)
         {

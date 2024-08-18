@@ -37,6 +37,20 @@ public class FightManager : MonoBehaviour
     public Transform SpawnPosTopLeft, SpawnPosBottomRight;
 
 
+    IEnumerator TutorialCo()
+    {
+        yield return null;
+        // Start conversation
+        // Wait until player has shrunk once
+        while (!Player.Instance.Scaling.HasBeenRightClicked)
+            yield return null;
+        VNSceneManager.scene_manager.Button_Pressed();
+        // Wait until player has grown once
+        while (!Player.Instance.Scaling.HasBeenLeftClicked)
+            yield return null;
+        VNSceneManager.scene_manager.Button_Pressed();
+    }
+
     IEnumerator ProgressCoroutine()
     {
         yield return new WaitForSeconds(0.5f);
@@ -190,6 +204,7 @@ public class FightManager : MonoBehaviour
     {
         Instance = this;
         StartCoroutine(ProgressCoroutine());
+        StartCoroutine(TutorialCo());
         /*
         AnimationManager.AddAnim(AnimationManager.Instance.PlayAndFinishAnimation(EnemyAnimator, "PunchLeft"));
         AnimationManager.AddAnim(AnimationManager.Instance.PlayAndFinishAnimation(PlayerAnimator, "PunchRight"));
