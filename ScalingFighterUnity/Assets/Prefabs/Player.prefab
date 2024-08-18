@@ -387,7 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   MovementSpeed: 1.5
-  GetWithinTargetDist: 6
+  GetWithinTargetDist: 2
   OpponentTagToTarget: Enemy
 --- !u!212 &3537977911240204135
 SpriteRenderer:
