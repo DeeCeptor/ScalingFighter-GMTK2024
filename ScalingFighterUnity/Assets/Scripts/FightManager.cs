@@ -33,7 +33,7 @@ public class FightManager : MonoBehaviour
 
         Debug.Log("Spawning two enemies");
         // Spawn enemy (left side)
-        SpawnPrefab(EnemyPrefab, false, specificPos: SpawnPosTopLeft.position);
+        SpawnPrefab(EnemyPrefab, true, specificPos: SpawnPosTopLeft.position);
 
         yield return new WaitForSeconds(10f);
         // Spawn enemy (right side)
@@ -127,7 +127,7 @@ public class FightManager : MonoBehaviour
     {
         return new Vector3(
             Random.Range(SpawnPosTopLeft.position.x, SpawnPosBottomRight.position.x)
-            , Random.Range(SpawnPosTopLeft.position.y, SpawnPosBottomRight.position.y) + 10f    // Drop in from above!
+            , Random.Range(SpawnPosTopLeft.position.y, SpawnPosBottomRight.position.y) + 15f    // Drop in from above!
             , Random.Range(SpawnPosTopLeft.position.z, SpawnPosBottomRight.position.z));
     }
 
@@ -160,11 +160,11 @@ public class FightManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Equals))
         {
-            Instantiate(PlayerPrefab, GetRandomSpawnPos(), Quaternion.identity);
+            SpawnPrefab(PlayerPrefab, true);
         }
         else if (Input.GetKeyDown(KeyCode.Minus))
         {
-            Instantiate(EnemyPrefab, GetRandomSpawnPos(), Quaternion.identity);
+            SpawnPrefab(EnemyPrefab, true);
         }
     }
 
