@@ -15,9 +15,9 @@ public class FightManager : MonoBehaviour
     public GameObject PlayerPrefab;
     public GameObject EnemyPrefab;
     /// <summary>
-    /// Spawn positions for new enemies/players
+    /// Spawn boundaries for new units
     /// </summary>
-    public Transform SpawnPosLeft, SpawnPosRight;
+    public Transform SpawnPosTopLeft, SpawnPosBottomRight;
     
     public Animator EnemyAnimator;
     public Animator PlayerAnimator;
@@ -34,38 +34,60 @@ public class FightManager : MonoBehaviour
 
         Debug.Log("Spawning two enemies");
         // Spawn enemy (left side)
-        Instantiate(EnemyPrefab, SpawnPosLeft.position, Quaternion.identity);
+        Instantiate(EnemyPrefab, SpawnPosTopLeft.position, Quaternion.identity);
 
         yield return new WaitForSeconds(10f);
         // Spawn enemy (right side)
-        Instantiate(EnemyPrefab, SpawnPosRight.position, Quaternion.identity);
+        Instantiate(EnemyPrefab, SpawnPosBottomRight.position, Quaternion.identity);
 
         while (TargetsPerTeam["Enemy"].Count > 0)
             yield return null;
         Debug.Log("Spawning friendly");
         // Spawn friendly
-        Instantiate(PlayerPrefab, SpawnPosLeft.position, Quaternion.identity);
+        Instantiate(PlayerPrefab, GetRandomSpawnPos(), Quaternion.identity);
         // Wait
         yield return new WaitForSeconds(2f);
         // Spawn enemy
         Instantiate(EnemyPrefab, Vector3.zero, Quaternion.identity);
         yield return new WaitForSeconds(15f);
         // Spawn enemy (left side)
-        Instantiate(EnemyPrefab, SpawnPosLeft.position, Quaternion.identity);
+        Instantiate(EnemyPrefab, GetRandomSpawnPos(), Quaternion.identity);
         // Spawn enemy (right side)
-        Instantiate(EnemyPrefab, SpawnPosRight.position, Quaternion.identity);
+        Instantiate(EnemyPrefab, GetRandomSpawnPos(), Quaternion.identity);
 
-        // Spawn enemy
+        // Spawn enemies indefinitely, faster and faster
+        float minSpawnTime = 10f;   // In seconds
+        float maxSpawnTime = 30f;
+        int loopNumber = 0;
+        while (true)
+        {
+            Instantiate(EnemyPrefab, GetRandomSpawnPos(), Quaternion.identity);
+            yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
+            Instantiate(EnemyPrefab, GetRandomSpawnPos(), Quaternion.identity);
+            yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
+            Instantiate(EnemyPrefab, GetRandomSpawnPos(), Quaternion.identity);
+            yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
+            Instantiate(EnemyPrefab, GetRandomSpawnPos(), Quaternion.identity);
+            yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
+            // Give player new friendly if count is low enough
+            if (TargetsPerTeam["Player"].Count < 3)
+                Instantiate(PlayerPrefab, GetRandomSpawnPos(), Quaternion.identity);
 
-        // Wait
-        // Spawn enemy
-        // Wait
-        // Spawn enemy
-        // Spawn friendly
-        // Spawn enemy
+            // Make them spawn faster
+            minSpawnTime = Mathf.Max(5f, minSpawnTime - 1f);
+            maxSpawnTime = Mathf.Max(minSpawnTime, maxSpawnTime - 2f);
+            loopNumber++;
+        }
 
         yield return null;
 
+    }
+    public Vector3 GetRandomSpawnPos()
+    {
+        return new Vector3(
+            Random.Range(SpawnPosTopLeft.position.x, SpawnPosBottomRight.position.x)
+            , Random.Range(SpawnPosTopLeft.position.y, SpawnPosBottomRight.position.y) + 10f    // Drop in from above!
+            , Random.Range(SpawnPosTopLeft.position.z, SpawnPosBottomRight.position.z));
     }
 
 
@@ -80,6 +102,21 @@ public class FightManager : MonoBehaviour
         if (!TargetsPerTeam.ContainsKey(d.tag))
             return;
         TargetsPerTeam[d.tag].Remove(d);
+    }
+
+    private void Update()
+    {
+        // User STOPPED fast-forwarding, restore normal timescale speed
+        if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            Time.timeScale = 1f;
+
+        }
+        // FAST FORWARD if player holds TAB
+        else if (Input.GetKey(KeyCode.Tab))
+        {
+            Time.timeScale = 4f;
+        }
     }
 
     public static FightManager Instance;
