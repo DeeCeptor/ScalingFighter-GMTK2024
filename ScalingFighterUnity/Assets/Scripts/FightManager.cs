@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Queues a bunch of animations. Punch, kick, etc
@@ -82,6 +83,36 @@ public class FightManager : MonoBehaviour
         yield return null;
 
     }
+
+    public bool GameIsOver = false;
+    /// <summary>
+    /// SetActive if player loses
+    /// </summary>
+    public GameObject GameOverPanel;
+    IEnumerator GameOverChecker()
+    {
+        yield return new WaitForSeconds(0.5f);
+        yield return null;
+        while (true)
+        {
+            yield return null;
+            if (!GameIsOver && TargetsPerTeam["Player"].Count <= 0)
+            {
+                Debug.Log("Game over!");
+                GameIsOver = true;
+                Time.timeScale = 0f;
+                GameOverPanel.SetActive(true);
+            }
+        }
+    }
+
+    public void ReloadScene()
+    {
+        Time.timeScale = 1f;
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
+    }
+
     public Vector3 GetRandomSpawnPos()
     {
         return new Vector3(
@@ -124,6 +155,7 @@ public class FightManager : MonoBehaviour
     {
         Instance = this;
         StartCoroutine(ProgressCoroutine());
+        StartCoroutine(GameOverChecker());
         /*
         AnimationManager.AddAnim(AnimationManager.Instance.PlayAndFinishAnimation(EnemyAnimator, "PunchLeft"));
         AnimationManager.AddAnim(AnimationManager.Instance.PlayAndFinishAnimation(PlayerAnimator, "PunchRight"));
