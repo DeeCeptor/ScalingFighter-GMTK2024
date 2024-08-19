@@ -10,6 +10,7 @@ public class Damageable : ITriggerable
     public string TagThatHurtsUs;
     public TextMeshPro HealthText;
     public bool Dead = false;
+    public Animator Anims;
 
     public void AlterHealth(float amount)
     {
@@ -42,6 +43,10 @@ public class Damageable : ITriggerable
     /// <param name="from"></param>
     public virtual void TakeHit(Vector3 position, GameObject from)
     {
+        if (Anims != null)
+        {
+            Anims.SetBool("IsSlapped", true);
+        }
         float damage = -20f;
         if (from != null)
         {
