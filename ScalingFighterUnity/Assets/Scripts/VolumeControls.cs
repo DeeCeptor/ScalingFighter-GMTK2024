@@ -15,11 +15,11 @@ public class VolumeControls : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        if (Input.GetKeyDown(KeyCode.KeypadPlus) || Input.GetKeyDown(KeyCode.Equals))
         {
             m_MyAudioSource.volume += 0.05f;
         }
-        else if (Input.GetKeyDown(KeyCode.KeypadMinus))
+        else if (Input.GetKeyDown(KeyCode.KeypadMinus) || Input.GetKeyDown(KeyCode.Minus))
         {
             m_MyAudioSource.volume -= 0.05f;
         }

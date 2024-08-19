@@ -190,11 +190,11 @@ public class FightManager : MonoBehaviour
         {
             Time.timeScale = 4f;
         }
-        else if (Input.GetKeyDown(KeyCode.Equals))
+        else if (Input.GetKeyDown(KeyCode.RightBracket))
         {
             SpawnPrefab(PlayerPrefab, true);
         }
-        else if (Input.GetKeyDown(KeyCode.Minus))
+        else if (Input.GetKeyDown(KeyCode.LeftBracket))
         {
             SpawnPrefab(EnemyPrefab, true);
         }
