@@ -111,5 +111,11 @@ public class MoveTowardsTarget : MonoBehaviour
         {
             Anims.SetFloat("Random", Random.Range(0f, 1f));
         }
+
+        //reset if they fall off the map
+        if (this.transform.position.y < -20f)
+        {
+            this.transform.position = new Vector3(14.47f, 2f, 1f);
+        }
     }
 }
