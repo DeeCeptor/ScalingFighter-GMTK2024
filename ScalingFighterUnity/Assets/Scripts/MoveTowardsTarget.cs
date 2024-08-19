@@ -109,7 +109,15 @@ public class MoveTowardsTarget : MonoBehaviour
 
         if (Anims != null)
         {
-            Anims.SetFloat("Random", Random.Range(0f, 1f));
+            Debug.Log(this.transform.name+" reports: \n"+ "target size: "+Target.localScale.x+" my size: "+this.transform.localScale.x);
+            if (Mathf.Abs(Target.localScale.x) <= Mathf.Abs(this.transform.localScale.x))
+            {
+                Anims.SetBool("Kicking", true);
+            }
+            else
+            {
+                Anims.SetBool("Kicking", false);
+            }
         }
 
         //reset if they fall off the map
