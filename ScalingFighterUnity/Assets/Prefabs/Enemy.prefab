@@ -826,6 +826,7 @@ MonoBehaviour:
   TagThatHurtsUs: PlayerHitbox
   HealthText: {fileID: 20950008207162733}
   Dead: 0
+  Anims: {fileID: 4113146755842370767}
 --- !u!114 &8074969945299970660
 MonoBehaviour:
   m_ObjectHideFlags: 0

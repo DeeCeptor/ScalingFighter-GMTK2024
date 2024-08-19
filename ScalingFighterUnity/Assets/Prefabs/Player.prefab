@@ -1657,6 +1657,7 @@ MonoBehaviour:
   TagThatHurtsUs: EnemyHitbox
   HealthText: {fileID: 0}
   Dead: 0
+  Anims: {fileID: 6498276570629610099}
   Movement: {fileID: 1673219622804640074}
   Scaling: {fileID: 1972731816283187187}
 --- !u!114 &1673219622804640074
