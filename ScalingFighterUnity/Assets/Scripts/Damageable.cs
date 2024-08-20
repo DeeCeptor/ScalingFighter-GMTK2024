@@ -43,19 +43,37 @@ public class Damageable : ITriggerable
     /// <param name="from"></param>
     public virtual void TakeHit(Vector3 position, GameObject from)
     {
-        if (Anims != null)
-        {
-            Anims.SetBool("IsSlapped", true);
-        }
         float damage = -20f;
         if (from != null)
         {
             // Check scale of enemy to influence damage
             Damageable unitHittingUs = from.GetComponentInParent<Damageable>();
+            float enemyscale = Mathf.Abs(unitHittingUs.transform.localScale.y);
+            float myscale = Mathf.Abs(this.transform.localScale.y);
             if (unitHittingUs != null)
             {
                 damage = -Mathf.Abs(unitHittingUs.transform.localScale.x);
                 Debug.Log("TakeHit from scaled object " + unitHittingUs.transform.name + " " + damage, unitHittingUs.gameObject);
+                Debug.Log(this.transform.name+" reports: \n"+"scale ratio: "+(enemyscale-myscale));
+            }
+            if (Anims != null)
+            {
+                Anims.SetBool("IsSlapped", true);
+                if (enemyscale - myscale >= 1f) // if they are big enough to slap our head
+                {
+                    //Debug.Log(this.transform.name+" reports: \n"+"scale ratio: "+(enemyscale-myscale));
+                    Anims.SetInteger("SlapPos", 2);
+                }
+                else if (enemyscale - myscale >= -1f) // if they are big enough to not slap our shins
+                {
+                    //Debug.Log(this.transform.name+" reports: \n"+"scale ratio: "+(enemyscale-myscale));
+                    Anims.SetInteger("SlapPos", 1);
+                }
+                else
+                {
+                    //Debug.Log(this.transform.name+" reports: \n"+"scale ratio: "+(enemyscale-myscale));
+                    Anims.SetInteger("SlapPos", 0);
+                }
             }
         }
         AlterHealth(damage);
